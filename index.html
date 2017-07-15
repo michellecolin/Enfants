@@ -88,7 +88,7 @@
 					<div ng-show="registerForm.brand.$error.required && registerForm.brand.$dirty" class="error">O campo veículo é obrigatório!</div>
 			  </div>
 
-			  <div class="form-group">
+			  <div class="form-group" ng-show="modelsLoaded">
 			  	<label>Modelo</label>
 					<select class="form-control" name="model" ng-model="register.model" ng-options="model.nome for model in veicles.models" ng-required="true" ng-class="{'has-error': registerForm.model.$error.required && registerForm.model.$dirty}">
 						<option value="">Selecione uma veículo</option>
@@ -101,7 +101,11 @@
 		    <input type="text" class="form-control" name="address" ng-model="register.address" ng-required="true" ng-class="{'has-error': registerForm.address.$error.required && registerForm.address.$dirty}">
 		    <div ng-show="registerForm.address.$error.required && registerForm.address.$dirty" class="error">O campo endereço é obrigatório!</div>
 		  </div>
-		  <button type="submit" class="btn btn-primary btn-md pull-right" ng-click="addRegister(register)" ng-disabled="registerForm.$invalid">Submit</button>
+
+		  <div class="pull-right">
+			  <button type="submit" class="btn btn-default btn-md" ng-click="cancel()">Cancel</button>
+			  <button type="submit" class="btn btn-primary btn-md" ng-click="addRegister(register)" ng-disabled="registerForm.$invalid">Submit</button>
+		 	</div>
 		</form>
 	</div>
 </body>

@@ -5,6 +5,7 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 	$scope.cadastro = "Novo Cadastro";
 	$scope.veicles = {};
 	$scope.editing = false;
+	$scope.modelsLoaded = false;
 
 	$http({
 	  method: 'GET',
@@ -48,6 +49,7 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		$scope.showList = true;
 		$scope.alert.show = true; 
 		saveOnLocalStorage();
+		$scope.modelsLoaded = false;
 
 		$timeout(function() {
 			$scope.alert.show = false;
@@ -59,6 +61,7 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		$scope.showList = false;
 		$scope.newRegister = true;
 		$scope.editing = true;
+		$scope.modelsLoaded = true;
 		$scope.veicles.models = [register.model];
 		$scope.register = register;
 	};
@@ -93,8 +96,19 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		  url: 'https://fipe-parallelum.rhcloud.com/api/v1/carros/marcas/' + brand + '/modelos'
 			}).then(function successCallback(response) {
 				$scope.veicles.models = response.data.modelos;
+				$scope.modelsLoaded = true;
 	  	}, function errorCallback(response) {
 	  });
+	};
+
+	$scope.cancel = function() {
+		$scope.editing = false;
+		$scope.cadastro = "Novo Cadastro";
+		delete $scope.register;
+		$scope.registerForm.$setPristine();
+		$scope.newRegister = false;
+		$scope.showList = true;
+		$scope.modelsLoaded = false;
 	};
 
 	function saveOnLocalStorage() {
