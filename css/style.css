@@ -6,6 +6,10 @@ table {
 	margin-top: 20px;
 }
 
+button {
+	margin-bottom: 20px;
+}
+
 .has-error {
   border: #e68080 1px solid;
   background-color: #ffe6e6;
