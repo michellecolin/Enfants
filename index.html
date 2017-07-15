@@ -22,32 +22,37 @@
 
 		<ul class="nav nav-tabs">
 		  <li role="presentation" ng-class="{'active': showList}" ng-click="showList = true; newRegister = false"><a href="#">Lista de cadastros</a></li>
-		  <li role="presentation" ng-class="{'active': newRegister}" ng-click="newRegister = true; showList = false"><a href="#">Novo Cadastro</a></li>
+		  <li role="presentation" ng-class="{'active': newRegister}" ng-click="newRegister = true; showList = false"><a href="#">{{cadastro}}</a></li>
 		</ul>
 
-		<table class="table table-hover table-striped" ng-show="showList" ng-cloak> 
-			<thead> 
-				<tr> 
-					<th>CPF</th> 
-					<th>Nome</th> 
-					<th>Data de nascimento</th> 
-					<th>Veículo</th> 
-					<th>Opções</th> 
-				</tr> 
-			</thead> 
-			<tbody> 
-				<tr ng-repeat="register in registers"> 
-					<th scope="row">{{register.cpf}}</th> 
-					<td>{{register.name}}</td> 
-					<td>{{register.birthDate}}</td> 
-					<td>{{register.veicle}}</td> 
-					<td class="options">
-						<span class="glyphicon glyphicon-pencil edit" ng-click="editRegister(register)" alt="Editar cadastro" title="Editar cadastro"></span>
-						<span class="glyphicon glyphicon-trash delete" ng-click="removeRegisters($index)" alt="Remover cadastro" title="Remover cadastro"></span>
-					</td> 
-				</tr> 
-			</tbody> 
-		</table>
+		<div ng-show="showList" ng-cloak>
+			<table class="table table-hover table-striped"> 
+				<thead> 
+					<tr> 
+						<th></th>
+						<th>CPF</th> 
+						<th>Nome</th> 
+						<th>Data de nascimento</th> 
+						<th>Veículo</th> 
+						<th>Opções</th> 
+					</tr> 
+				</thead> 
+				<tbody> 
+					<tr ng-repeat="register in registers"> 
+						<td><input type="checkbox" ng-model="register.selected"/></td>
+						<th scope="row">{{register.cpf}}</th> 
+						<td>{{register.name}}</td> 
+						<td>{{register.birthDate}}</td> 
+						<td>{{register.veicle}}</td> 
+						<td class="options">
+							<span class="glyphicon glyphicon-pencil edit" ng-click="editRegister(register)" alt="Editar cadastro" title="Editar cadastro"></span>
+							<span class="glyphicon glyphicon-trash delete" ng-click="removeRegister($index)" alt="Remover cadastro" title="Remover cadastro"></span>
+						</td> 
+					</tr> 
+				</tbody> 
+			</table>
+			<button type="button" class="btn btn-default pull-left" ng-click="removeMultipleRegisters(registers)">Remover Cadastros</button>
+		</div>
 	</div>
 
 	<div class="container" ng-show="newRegister" ng-cloak>

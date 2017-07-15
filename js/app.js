@@ -2,6 +2,7 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 	$scope.showList = true;
 	$scope.newRegister = false;
 	$scope.alert = {show: false};
+	$scope.cadastro = "Novo Cadastro";
 
 	$scope.registers = [
 		{
@@ -48,11 +49,14 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		}, 2000);
 	};
 
-	$scope.editRegister = function() {
-
+	$scope.editRegister = function(register) {
+		$scope.cadastro = "Editar Cadastro";
+		$scope.showList = false;
+		$scope.newRegister = true;
+		$scope.register = register;
 	};
-	
-	$scope.removeRegisters = function(index) {
+
+	$scope.removeRegister = function(index) {
 		$scope.registers.splice(index, 1);
 		$scope.alert.message = "Cadastro removido!";
 		$scope.alert.show = true; 
@@ -62,5 +66,10 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		}, 2000);
 	}
 
-	
+	$scope.removeMultipleRegisters = function (registers) {
+		$scope.registers = registers.filter(function (register) {
+			if (!register.selected) return register;
+		});
+	};
+
 });
