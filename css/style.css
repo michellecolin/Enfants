@@ -1,0 +1,12 @@
+.has-error {
+  border: #e68080 1px solid;
+  background-color: #ffe6e6;
+}
+
+.error {
+	color: #e68080;
+}
+
+.birth {
+	width: 200px;
+}

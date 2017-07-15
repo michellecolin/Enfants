@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Cadastro de Veículos</title>
+	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<script src="libs/jquery.min.js"></script>
+	<script src="libs/angular.min.js"></script>
+	<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+	<script src="libs/ui-mask-master/dist/mask.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+
+<body ng-app="register" ng-controller="registerCtrl">
+	<div class="page-header text-center">
+  	<h1>Cadastro de veículos</h1>
+	</div>
+
+	<div class="container-fluid">
+		<div class="alert alert-success" role="alert" ng-show="alert.show">{{alert.message}}</div>
+
+		<ul class="nav nav-tabs">
+		  <li role="presentation" ng-class="{'active': showList}" ng-click="showList = true; newRegister = false"><a href="#">Lista de cadastros</a></li>
+		  <li role="presentation" ng-class="{'active': newRegister}" ng-click="newRegister = true; showList = false"><a href="#">Novo Cadastro</a></li>
+		</ul>
+
+		<table class="table table-hover table-striped" ng-show="showList"> 
+			<thead> 
+				<tr> 
+					<th>CPF</th> 
+					<th>Nome</th> 
+					<th>Data de nascimento</th> 
+					<th>Veículo</th> 
+					<th>Opções</th> 
+				</tr> 
+			</thead> 
+			<tbody> 
+				<tr ng-repeat="register in registers"> 
+					<th scope="row">{{register.cpf}}</th> 
+					<td>{{register.name}}</td> 
+					<td>{{register.birthDate}}</td> 
+					<td>{{register.veicle}}</td> 
+					<td>@mdo</td> 
+				</tr> 
+			</tbody> 
+		</table>
+	</div>
+
+	<div class="container" ng-show="newRegister">
+		<form name="registerForm">
+		  <div class="form-group">
+	  		<label>Nome</label>
+		    <input type="text" class="form-control" name="name" ng-model="register.name" ng-required="true" ng-class="{'has-error': registerForm.name.$error.required && registerForm.name.$dirty}">
+		    <div ng-show="registerForm.name.$error.required && registerForm.name.$dirty" class="error">O campo nome é obrigatório!</div>
+		  </div>
+		   <div class="form-group">
+		   	<label>CPF</label>
+		    <input type="text" class="form-control" name="cpf" ng-model="register.cpf"  ui-mask="999.999.999-99" ng-required="true" ng-class="{'has-error': registerForm.cpf.$error.required && registerForm.cpf.$dirty}">
+		    <div ng-show="registerForm.cpf.$error.required && registerForm.cpf.$dirty" class="error">O campo CPF é obrigatório!</div>
+		  </div>
+		  <div class="form-group">
+		  	<label>Data de nascimento</label>
+		    <input type="date" class="form-control birth" name="birth" ng-model="register.birthDate" ng-required="true" ng-class="{'has-error': (registerForm.birth.$error.required || registerForm.birth.$error.date) && registerForm.birth.$dirty }">
+		    <div ng-show="registerForm.birth.$error.required && registerForm.birth.$dirty" class="error">O campo data de nascimento é obrigatório!</div>
+		    <div ng-show="registerForm.birth.$error.date && registerForm.birth.$dirty" class="error">Data inválida!</div>
+		  </div>
+		  <div class="form-group">
+		  	<label>Veículo</label>
+		    <input type="text" class="form-control" name="veicle" ng-model="register.veicle" ng-required="true" ng-class="{'has-error': registerForm.veicle.$error.required && registerForm.veicle.$dirty}">
+		    <div ng-show="registerForm.veicle.$error.required && registerForm.veicle.$dirty" class="error">O campo veículo é obrigatório!</div>
+		  </div>
+		  <div class="form-group">
+		  	<label>Endereço</label>
+		    <input type="text" class="form-control" name="address" ng-model="register.address" ng-required="true" ng-class="{'has-error': registerForm.address.$error.required && registerForm.address.$dirty}">
+		    <div ng-show="registerForm.address.$error.required && registerForm.address.$dirty" class="error">O campo endereço é obrigatório!</div>
+		  </div>
+		  <button type="submit" class="btn btn-primary" ng-click="addRegister(register)" ng-disabled="registerForm.$invalid">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
