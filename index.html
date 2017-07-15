@@ -20,13 +20,13 @@
 	<div class="container-fluid">
 		<div class="alert alert-success" role="alert" ng-show="alert.show" ng-cloak>{{alert.message}}</div>
 
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs" ng-cloak>
 		  <li role="presentation" ng-class="{'active': showList}" ng-click="showList = true; newRegister = false"><a href="#">Lista de cadastros</a></li>
 		  <li role="presentation" ng-class="{'active': newRegister}" ng-click="newRegister = true; showList = false"><a href="#">{{cadastro}}</a></li>
 		</ul>
 
 		<div ng-show="showList" ng-cloak>
-			<table class="table table-hover table-striped"> 
+			<table class="table table-hover table-striped" ng-show="registers.length > 0"> 
 				<thead> 
 					<tr> 
 						<th></th>
@@ -53,7 +53,9 @@
 					</tr> 
 				</tbody> 
 			</table>
-			<button type="button" class="btn btn-default pull-left" ng-click="removeMultipleRegisters(registers)">Remover Cadastros</button>
+			<button type="button" class="btn btn-default pull-left" ng-click="removeMultipleRegisters(registers)" ng-show="registers.length > 0">Remover Cadastros</button>
+
+			<div class="no-records alert alert-warning" ng-show="registers.length == 0">Sem cadastros!</div>
 		</div>
 	</div>
 
@@ -77,28 +79,29 @@
 		  </div>
 
 		  <label>Veículo</label>
-		  <hr/>
-		  <div class="form-group">
-		  	<label>Marca</label>
-		    <select class="form-control" name="brand" ng-model="register.brand" ng-options="veicle.nome for veicle in veicles.brands" ng-required="true" ng-class="{'has-error': registerForm.brand.$error.required && registerForm.brand.$dirty}" ng-change="showModels(register.brand.codigo)">
-					<option value="">Selecione uma veículo</option>
-				</select>
-				<div ng-show="registerForm.brand.$error.required && registerForm.brand.$dirty" class="error">O campo veículo é obrigatório!</div>
-		  </div>
+		  <div class="veicle-infos">
+			  <div class="form-group">
+			  	<label>Marca</label>
+			    <select class="form-control" name="brand" ng-model="register.brand" ng-options="veicle.nome for veicle in veicles.brands" ng-required="true" ng-class="{'has-error': registerForm.brand.$error.required && registerForm.brand.$dirty}" ng-change="showModels(register.brand.codigo)">
+						<option value="">Selecione uma veículo</option>
+					</select>
+					<div ng-show="registerForm.brand.$error.required && registerForm.brand.$dirty" class="error">O campo veículo é obrigatório!</div>
+			  </div>
 
-		  <div class="form-group">
-		  	<label>Modelo</label>
-				<select class="form-control" name="model" ng-model="register.model" ng-options="model.nome for model in veicles.models" ng-required="true" ng-class="{'has-error': registerForm.model.$error.required && registerForm.model.$dirty}">
-					<option value="">Selecione uma veículo</option>
-				</select>
+			  <div class="form-group">
+			  	<label>Modelo</label>
+					<select class="form-control" name="model" ng-model="register.model" ng-options="model.nome for model in veicles.models" ng-required="true" ng-class="{'has-error': registerForm.model.$error.required && registerForm.model.$dirty}">
+						<option value="">Selecione uma veículo</option>
+					</select>
+				</div>
 			</div>
-
+			
 		  <div class="form-group">
 		  	<label>Endereço</label>
 		    <input type="text" class="form-control" name="address" ng-model="register.address" ng-required="true" ng-class="{'has-error': registerForm.address.$error.required && registerForm.address.$dirty}">
 		    <div ng-show="registerForm.address.$error.required && registerForm.address.$dirty" class="error">O campo endereço é obrigatório!</div>
 		  </div>
-		  <button type="submit" class="btn btn-primary" ng-click="addRegister(register)" ng-disabled="registerForm.$invalid">Submit</button>
+		  <button type="submit" class="btn btn-primary pull-right" ng-click="addRegister(register)" ng-disabled="registerForm.$invalid">Submit</button>
 		</form>
 	</div>
 </body>

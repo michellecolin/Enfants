@@ -1,3 +1,11 @@
+body {
+  font-size: 16px;
+}
+
+table {
+	margin-top: 20px;
+}
+
 .has-error {
   border: #e68080 1px solid;
   background-color: #ffe6e6;
@@ -28,4 +36,35 @@ hr {
 	margin-top: -5px;
   border: 0;
   border-top: 1px solid #9b9b9b;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.no-records {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.veicle-infos {
+	padding: 20px;
+  background: #ededed;
+  border-top: 1px solid #a6a6a6;
+  margin-bottom: 10px;
+}
+
+li.active {
+  font-weight: bold;
+}
+
+.page-header {
+  background-color: #005c76;
+  color: #fff;
+  padding-top: 10px;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 30px;
 }
