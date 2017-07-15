@@ -23,3 +23,9 @@
 .options > .delete {
 	color: red;
 }
+
+hr {
+	margin-top: -5px;
+  border: 0;
+  border-top: 1px solid #9b9b9b;
+}

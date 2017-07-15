@@ -33,17 +33,19 @@
 						<th>CPF</th> 
 						<th>Nome</th> 
 						<th>Data de nascimento</th> 
-						<th>Veículo</th> 
+						<th>Marca</th> 
+						<th>Modelo</th> 
 						<th>Opções</th> 
 					</tr> 
 				</thead> 
 				<tbody> 
-					<tr ng-repeat="register in registers"> 
+					<tr ng-repeat="register in registers track by $index"> 
 						<td><input type="checkbox" ng-model="register.selected"/></td>
 						<th scope="row">{{register.cpf}}</th> 
 						<td>{{register.name}}</td> 
-						<td>{{register.birthDate}}</td> 
-						<td>{{register.veicle}}</td> 
+						<td>{{register.birthDate | date:'dd/MM/yyyy'}}</td> 
+						<td>{{register.brand.nome}}</td> 
+						<td>{{register.model.nome}}</td> 
 						<td class="options">
 							<span class="glyphicon glyphicon-pencil edit" ng-click="editRegister(register)" alt="Editar cadastro" title="Editar cadastro"></span>
 							<span class="glyphicon glyphicon-trash delete" ng-click="removeRegister($index)" alt="Remover cadastro" title="Remover cadastro"></span>
@@ -73,11 +75,24 @@
 		    <div ng-show="registerForm.birth.$error.required && registerForm.birth.$dirty" class="error">O campo data de nascimento é obrigatório!</div>
 		    <div ng-show="registerForm.birth.$error.date && registerForm.birth.$dirty" class="error">Data inválida!</div>
 		  </div>
+
+		  <label>Veículo</label>
+		  <hr/>
 		  <div class="form-group">
-		  	<label>Veículo</label>
-		    <input type="text" class="form-control" name="veicle" ng-model="register.veicle" ng-required="true" ng-class="{'has-error': registerForm.veicle.$error.required && registerForm.veicle.$dirty}">
-		    <div ng-show="registerForm.veicle.$error.required && registerForm.veicle.$dirty" class="error">O campo veículo é obrigatório!</div>
+		  	<label>Marca</label>
+		    <select class="form-control" name="brand" ng-model="register.brand" ng-options="veicle.nome for veicle in veicles.brands" ng-required="true" ng-class="{'has-error': registerForm.brand.$error.required && registerForm.brand.$dirty}" ng-change="showModels(register.brand.codigo)">
+					<option value="">Selecione uma veículo</option>
+				</select>
+				<div ng-show="registerForm.brand.$error.required && registerForm.brand.$dirty" class="error">O campo veículo é obrigatório!</div>
 		  </div>
+
+		  <div class="form-group">
+		  	<label>Modelo</label>
+				<select class="form-control" name="model" ng-model="register.model" ng-options="model.nome for model in veicles.models" ng-required="true" ng-class="{'has-error': registerForm.model.$error.required && registerForm.model.$dirty}">
+					<option value="">Selecione uma veículo</option>
+				</select>
+			</div>
+
 		  <div class="form-group">
 		  	<label>Endereço</label>
 		    <input type="text" class="form-control" name="address" ng-model="register.address" ng-required="true" ng-class="{'has-error': registerForm.address.$error.required && registerForm.address.$dirty}">
