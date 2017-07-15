@@ -28,8 +28,6 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 			registers = convertDateObjects(registers);
 			$scope.registers = registers;
 		}
-
-		console.log($scope.registers);
 	} catch(err) {
 		//err
 	}
@@ -63,8 +61,6 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		$scope.editing = true;
 		$scope.veicles.models = [register.model];
 		$scope.register = register;
-		console.log(register);
-
 	};
 
 	$scope.removeRegister = function(index) {
@@ -82,7 +78,13 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 		$scope.registers = registers.filter(function (register) {
 			if (!register.selected) return register;
 		});
+		$scope.alert.message = "Cadastros removidos!";
+		$scope.alert.show = true; 
 		saveOnLocalStorage();
+
+		$timeout(function() {
+			$scope.alert.show = false;
+		}, 2000);
 	};
 
 	$scope.showModels = function(brand) {
