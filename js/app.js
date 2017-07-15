@@ -6,6 +6,7 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 	$scope.veicles = {};
 	$scope.editing = false;
 	$scope.modelsLoaded = false;
+	$scope.error = {show: false};
 
 	$http({
 	  method: 'GET',
@@ -78,16 +79,31 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 	}
 
 	$scope.removeMultipleRegisters = function (registers) {
+		var count = 0;
 		$scope.registers = registers.filter(function (register) {
-			if (!register.selected) return register;
+			if (!register.selected) {
+				return register;
+			} else {
+				count++;
+			}
 		});
-		$scope.alert.message = "Cadastros removidos!";
-		$scope.alert.show = true; 
-		saveOnLocalStorage();
 
-		$timeout(function() {
-			$scope.alert.show = false;
-		}, 2000);
+		if (count > 0) {
+			$scope.alert.message = "Cadastros removidos!";
+			$scope.alert.show = true; 
+			saveOnLocalStorage();
+
+			$timeout(function() {
+				$scope.alert.show = false;
+			}, 2000);
+		} else {
+			$scope.error.message = "Você não selecionou nenhum cadastro para remoção!";
+			$scope.error.show = true; 
+
+			$timeout(function() {
+				$scope.error.show = false;
+			}, 2000);
+		}
 	};
 
 	$scope.showModels = function(brand) {

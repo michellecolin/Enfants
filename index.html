@@ -19,6 +19,7 @@
 
 	<div class="container-fluid">
 		<div class="alert alert-success" role="alert" ng-show="alert.show" ng-cloak>{{alert.message}}</div>
+		<div class="alert alert-danger" role="alert" ng-show="error.show" ng-cloak>{{error.message}}</div>
 
 		<ul class="nav nav-tabs" ng-cloak>
 		  <li role="presentation" ng-class="{'active': showList}" ng-click="showList = true; newRegister = false"><a href="#">Lista de cadastros</a></li>
