@@ -44,6 +44,11 @@ hr {
 
 .container {
   margin-top: 20px;
+  padding-top: 10px;
+  background: #fff;
+  border: 1px solid #d7d7d7;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .no-records {
@@ -53,9 +58,9 @@ hr {
 
 .veicle-infos {
 	padding: 20px;
-  background: #ededed;
   border-top: 1px solid #a6a6a6;
   margin-bottom: 10px;
+  background: whitesmoke;
 }
 
 li.active {
