@@ -45,8 +45,22 @@ angular.module("register", ['ui.mask']).controller("registerCtrl", function($sco
 
 		$timeout(function() {
 			$scope.alert.show = false;
-		}, 1000);
+		}, 2000);
 	};
+
+	$scope.editRegister = function() {
+
+	};
+	
+	$scope.removeRegisters = function(index) {
+		$scope.registers.splice(index, 1);
+		$scope.alert.message = "Cadastro removido!";
+		$scope.alert.show = true; 
+
+		$timeout(function() {
+			$scope.alert.show = false;
+		}, 2000);
+	}
 
 	
 });

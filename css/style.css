@@ -10,3 +10,16 @@
 .birth {
 	width: 200px;
 }
+
+.options > span{
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.options > .edit {
+	color: #24658e;
+}
+
+.options > .delete {
+	color: red;
+}

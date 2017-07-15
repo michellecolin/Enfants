@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="libs/jquery.min.js"></script>
+	<script src="libs/angular.min.js"></script>
 	<title>Cadastro de Veículos</title>
 	<link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="css/style.css"/>
-	<script src="libs/jquery.min.js"></script>
-	<script src="libs/angular.min.js"></script>
 	<script src="libs/bootstrap/js/bootstrap.min.js"></script>
 	<script src="libs/ui-mask-master/dist/mask.min.js"></script>
 	<script src="js/app.js"></script>
@@ -18,14 +18,14 @@
 	</div>
 
 	<div class="container-fluid">
-		<div class="alert alert-success" role="alert" ng-show="alert.show">{{alert.message}}</div>
+		<div class="alert alert-success" role="alert" ng-show="alert.show" ng-cloak>{{alert.message}}</div>
 
 		<ul class="nav nav-tabs">
 		  <li role="presentation" ng-class="{'active': showList}" ng-click="showList = true; newRegister = false"><a href="#">Lista de cadastros</a></li>
 		  <li role="presentation" ng-class="{'active': newRegister}" ng-click="newRegister = true; showList = false"><a href="#">Novo Cadastro</a></li>
 		</ul>
 
-		<table class="table table-hover table-striped" ng-show="showList"> 
+		<table class="table table-hover table-striped" ng-show="showList" ng-cloak> 
 			<thead> 
 				<tr> 
 					<th>CPF</th> 
@@ -41,13 +41,16 @@
 					<td>{{register.name}}</td> 
 					<td>{{register.birthDate}}</td> 
 					<td>{{register.veicle}}</td> 
-					<td>@mdo</td> 
+					<td class="options">
+						<span class="glyphicon glyphicon-pencil edit" ng-click="editRegister(register)" alt="Editar cadastro" title="Editar cadastro"></span>
+						<span class="glyphicon glyphicon-trash delete" ng-click="removeRegisters($index)" alt="Remover cadastro" title="Remover cadastro"></span>
+					</td> 
 				</tr> 
 			</tbody> 
 		</table>
 	</div>
 
-	<div class="container" ng-show="newRegister">
+	<div class="container" ng-show="newRegister" ng-cloak>
 		<form name="registerForm">
 		  <div class="form-group">
 	  		<label>Nome</label>
